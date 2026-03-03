@@ -11,7 +11,7 @@ def carregar_dados(arquivo):
             reader = csv.reader(csvfile, delimiter=',')
             next(reader)
             try:
-                alunos = {row[0]: row[1:] for row in reader}
+                alunos = {row[0]: [float(n) for n in row[1:]] for row in reader}
                 return alunos
             except ValueError:
                 raise DadosInvalidosError("Arquivo contém valores inválidos.")
