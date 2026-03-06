@@ -1,6 +1,9 @@
 import csv
 import matplotlib.pyplot as plt
 
+class DadosInvalidosError(Exception):
+    pass
+
 def carregar_dados(arquivo):
 
     try:
@@ -97,12 +100,9 @@ def grafico_desempenho_turma(dados):
 
     barras = plt.bar(status, quantidade, color=['#2ecc71', '#e74c3c'])
 
-    max_val = max(quantidade)
-    plt.ylim(0, max_val + (max_val * 0.1))
+    plt.ylim(0, len(dados))
 
-
-
-    passo = max(1, len(dados) // 10)
+    passo = max(1, len(dados) // 5)
     plt.yticks(range(0, len(dados) + 1, passo))
 
     plt.bar_label(barras, padding=5)
@@ -120,7 +120,7 @@ def main():
         alunos, erro = carregar_dados('turma_100.csv')
         relatorio_individual = desempenho_individual(alunos)
 
-    except FileNotFoundError as erro:
+    except (DadosInvalidosError, FileNotFoundError) as erro:
         print("Erro:", erro)
         return
 
