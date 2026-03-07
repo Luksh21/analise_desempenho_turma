@@ -23,6 +23,7 @@ O sistema realiza validação de dados, cálculo de métricas individuais e mét
 - Python 3
 - Biblioteca padrão `csv`
 - Git para versionamento
+- Matplotlib
 
 ---
 
